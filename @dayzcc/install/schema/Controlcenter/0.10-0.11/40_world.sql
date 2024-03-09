@@ -1,0 +1,1 @@
+update world set folder = '@mbg_celle;@dayz_celle;@dayz_conflicts' where name = 'mbg_celle2';

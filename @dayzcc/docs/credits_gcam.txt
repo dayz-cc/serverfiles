@@ -1,0 +1,9 @@
+GCam 2.0
+A Free Camera Addon/Script for ARMA2:OA
+
+GCam offers free camera operating with smooth movement for player.
+From beginning to end battle is observed by unit action pursuit,
+unit listing with list panel and symbolic situation viewing with search map.
+
+-----------------------
+Gigan(giganarma@gmail.com)

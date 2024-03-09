@@ -1,0 +1,1 @@
+update users set permissions = 'map,list,user,control,whitelist' where permissions = 'map,list,user,control';

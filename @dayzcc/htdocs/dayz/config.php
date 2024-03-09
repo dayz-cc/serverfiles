@@ -43,7 +43,7 @@ if (!isset($_SESSION['user_id']) || isset($_GET["instance"]))
 	$sth->bind_param("i", $serverinstance);
 	$sth->execute() or die($sth->error);
 	$sth->bind_result($serverworld);
-	$sth->fetch() or die($sth->error);
+	$sth->fetch(); // or die($sth->error);
 	$sth->close();
 
 	$_SESSION["serverworld"] = $serverworld;

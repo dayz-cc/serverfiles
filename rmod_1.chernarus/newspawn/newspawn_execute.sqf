@@ -1,0 +1,10 @@
+//diag_log ("ghk newspawn1");
+//sleep 5;
+//waitUntil {!dialog};
+//sleep 40;
+//waitUntil {vehicle player == player};
+waitUntil {!dialog};
+//diag_log ("ghk newspawn2");
+systemChat ('Use your scroll wheel to select a drop location!');
+cutText ["                 \nUse your scroll wheel to select a drop location!","PLAIN"];
+execVM "newspawn\newspawn_main.sqf";

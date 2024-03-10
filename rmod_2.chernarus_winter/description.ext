@@ -1,0 +1,344 @@
+respawn = "BASE";
+respawndelay = 5;
+__EXEC (_loadscreen = [ "pics\dz-running2-2048.jpg","pics\dz-running-2048.jpg"] select floor random 2);
+
+//"\z\addons\dayz_code\gui\dayz_logo_ca.paa"
+loadScreen = __EVAL(_loadscreen);
+//"\z\addons\dayz_code\gui\dayz_logo_ca.paa";
+onLoadMission = "DayZ Chernarus";
+OnLoadIntro = "Welcome to Chernarus";
+OnLoadIntroTime = False;
+OnLoadMissionTime = False;
+onPauseScript = "\z\addons\dayz_code\compile\player_onPause.sqf";
+disabledAI = true;
+disableChannels[] = {0,2}; //allow 6, messages that tell players someone has logged in (system messages) //{0,2,6};
+enableItemsDropping = 0;
+aiKills = 1;
+diagRadio = 1;
+diagHit = 1;
+
+//missionconfig 
+#include "loottables\CfgBuildingLoot.hpp"
+
+//infected camps
+#include "dayz_code\config\CfgObjectCompositions\CfgObjectCompositions.hpp"
+
+//mangled these files here
+class CfgSounds
+{
+sounds[] = {radio3,radio1B,radio2B,radio5B,bl_begin,bl_hit1,bl_hit2,bl_hit3,bl_wave1,bl_wave2,bl_wave3,bl_psi,bl_full,bl_detect,apsi_on,apsi_off,ns_fx_misc4,ns_fx_drone1,ns_fx_drone2,bark,growl,teleport,whistleFollow,whistleStay,whistleFind,whistleNon};
+#include "addons\blowout\config\sound.hpp"
+#include "addin\fx\descrExt.h"
+#include "radio\radionoise.hpp"
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// NUKE RELATED STUFF
+/////////////////////////////////////////////////////////////////////////////////////////
+class CfgMusic
+{
+	tracks[]={};
+
+	class nuke
+	{
+		name = "";
+		sound[] = {"nuke\nuke.ogg", db+0, 1.0};
+	};
+	class party
+	{
+		name = "";
+		sound[] = {"nuke\party.ogg", db+20, 1.0};
+	};	
+};
+/////////////////////////////////////////////////////////////////////////////////////////
+
+//GHK for snowfall:
+class CfgFunctions {
+    class DZN {
+        class Functions {
+            class snowfall {
+                description = "Simple snowfall script";
+                file = "dayz_code\init\fn_dzn_snowfall.sqf";
+            };
+        };
+    };
+};
+
+
+class Header
+{
+	gameType = COOP;
+	minPlayers = 1;
+	maxPlayers = 100;
+};
+
+#include "gcam\gcam_component.hpp"
+
+class RscText
+{
+	type = 0;
+	idc = -1;
+	x = 0;
+	y = 0;
+	h = 0.037;
+	w = 0.3;
+	style = 0x100; 
+	font = Zeppelin32;
+	SizeEx = 0.03921;
+	colorText[] = {1,1,1,1};
+	colorBackground[] = {0, 0, 0, 0};
+	linespacing = 1;
+};
+class RscPicture
+{
+	access=0;
+	type=0;
+	idc=-1;
+	style=48;
+	colorBackground[]={0,0,0,0};
+	colorText[]={1,1,1,1};
+	font="TahomaB";
+	sizeEx=0;
+	lineSpacing=0;
+	text="";
+};
+
+class RscLoadingText : RscText
+{
+	style = 2;
+	x = 0.323532;
+	y = 0.666672;
+	w = 0.352944;
+	h = 0.039216;
+	sizeEx = 0.03921;
+	colorText[] = {0.543,0.5742,0.4102,1.0};
+};
+class RscProgress
+{
+	x = 0.344;
+	y = 0.619;
+	w = 0.313726;
+	h = 0.0261438;
+	texture = "\ca\ui\data\loadscreen_progressbar_ca.paa";
+	colorFrame[] = {0,0,0,0};
+	colorBar[] = {1,1,1,1};
+};
+class RscProgressNotFreeze
+{
+	idc = -1;
+	type = 45;
+	style = 0;
+	x = 0.022059;
+	y = 0.911772;
+	w = 0.029412;
+	h = 0.039216;
+	texture = "#(argb,8,8,3)color(0,0,0,0)";
+};
+class DayZ_loadingScreen
+{ 
+	idd = -1;
+	duration = 10e10;
+	fadein = 0;
+	fadeout = 0;
+	name = "loading screen";
+	class controlsBackground
+	{
+		class blackBG : RscText
+		{
+			x = safezoneX;
+			y = safezoneY;
+			w = safezoneW;
+			h = safezoneH;
+			text = "";
+			colorText[] = {0,0,0,0};
+			colorBackground[] = {0,0,0,1};
+		};
+	};
+	class controls
+	{
+		class Title1 : RscLoadingText
+		{
+			text = "$STR_LOADING";
+		};
+		class CA_Progress : RscProgress
+		{
+			idc = 104;
+			type = 8;
+			style = 0;
+			texture = "\ca\ui\data\loadscreen_progressbar_ca.paa";
+		};
+		class CA_Progress2 : RscProgressNotFreeze
+		{
+			idc = 103;
+		};
+		class Name2: RscText
+		{
+			idc = 101;
+			x = 0.05;
+			y = 0.029412;
+			w = 0.9;
+			h = 0.04902;
+			text = "";
+			sizeEx = 0.05;
+			colorText[] = {0.543,0.5742,0.4102,1.0};
+		};
+	};
+};
+
+class RscTextNS
+{
+    idc = -1;
+    type = 0;
+    style = 2;
+    LineSpacing = 1.0;
+    h = 0.04;
+    ColorBackground[] = {1,1,1,0.2};
+    ColorText[] = {0.1,0.1,0.1,1};
+    font = "BitStream";
+    SizeEx = 0.025;
+};
+
+class RscTitles {
+
+	class logo
+	{
+		idd=-1;
+		movingEnable = 0;
+		duration=12;
+		name = "logo";
+		controls[]=
+		{
+			Picture
+		};  
+		class Picture : RscPicture
+		{
+			x = -0.5;
+ 			y = -0.5;
+ 			w = 0.15; 
+			h = 0.2;
+			text = "addin\fx\logo.paa";
+			sizeEx = 1;
+			style=48;
+		};
+	};
+	
+	
+    class RscAPSI_h1
+    {
+        idd = -1;
+        duration = 4;
+        fadein = 0;
+        movingEnable = 0;
+        enableSimulation = 0;
+        enableDisplay = 0;
+        class controls
+        {
+            class APSILog: RscTextNS
+            {
+                x = 0.5;
+                y = 0.99;
+                w = 0.5;
+                h = 0.03;
+                text = "APSI: Stronger activity of floax field has been detected..";
+                colorBackground[] = {0.5,0.5,0.5,0.4};
+                ColorText[] = {1.0,0.2,0.1,1};
+            };
+        };
+    };
+    class RscAPSI_h2: RscAPSI_h1
+    {
+        class controls
+        {
+            class APSILog: RscTextNS
+            {
+                x = 0.5;
+                y = 0.99;
+                w = 0.4;
+                h = 0.03;
+                text = "APSI: EVR sequence detected..";
+                colorBackground[] = {0.5,0.5,0.5,0.4};
+                ColorText[] = {1.0,0.0,0.2,1};
+            };
+        };
+    };
+    class RscAPSI_h3: RscAPSI_h1
+    {
+        class controls
+        {
+            class APSILog: RscTextNS
+            {
+                x = 0.5;
+                y = 0.99;
+                w = 0.4;
+                h = 0.03;
+                text = "APSI: EM and PSI protection enabled..";
+                colorBackground[] = {0.5,0.5,0.5,0.4};
+                ColorText[] = {0.0,1.0,0.2,1};
+            };
+        };
+    };
+    class RscAPSI_h4: RscAPSI_h1
+    {
+        class controls
+        {
+            class APSILog: RscTextNS
+            {
+                x = 0.5;
+                y = 0.99;
+                w = 0.4;
+                h = 0.03;
+                text = "APSI: Ready..";
+                colorBackground[] = {0.5,0.5,0.5,0.4};
+                ColorText[] = {0.0,1.0,0.2,1};
+            };
+        };
+    };
+    class RscAPSI_h5: RscAPSI_h1
+    {
+        class controls
+        {
+            class APSILog: RscTextNS
+            {
+                x = 0.5;
+                y = 0.99;
+                w = 0.4;
+                h = 0.03;
+                text = "APSI: EVR sequence start..";
+                colorBackground[] = {0.5,0.5,0.5,0.4};
+                ColorText[] = {1.0,0.0,0.2,1};
+            };
+        };
+    };
+    class RscAPSI_h6: RscAPSI_h1
+    {
+        class controls
+        {
+            class APSILog: RscTextNS
+            {
+                x = 0.5;
+                y = 0.99;
+                w = 0.4;
+                h = 0.03;
+                text = "APSI: End of EVR..";
+                colorBackground[] = {0.5,0.5,0.5,0.4};
+                ColorText[] = {0.0,1.0,0.2,1};
+            };
+        };
+    };
+    class RscAPSI_ha: RscAPSI_h1
+    {
+        class controls
+        {
+            class APSILog: RscTextNS
+            {
+                x = 0.5;
+                y = 0.99;
+                w = 0.4;
+                h = 0.03;
+                text = "Blowout module, v1.0, by Sumrak.";
+                colorBackground[] = {0.5,0.5,0.5,0.4};
+                ColorText[] = {0.0,1.0,0.2,1};
+            };
+        };
+    };
+};

@@ -1,0 +1,25 @@
+160306 21:57:21 Transaction:
+TRANSACTION E134A, ACTIVE 0 sec updating or deleting
+mysql tables in use 1, locked 1
+4 lock struct(s), heap size 320, 2 row lock(s), undo log entries 1
+MySQL thread id 622, OS thread handle 0xd60, query id 12090 localhost 127.0.0.1 dayz Updating
+UPDATE `instance` SET `world_id` = 0 WHERE `id` = 2
+Foreign key constraint fails for table `dayz_chernarus_winter`.`instance`:
+,
+  CONSTRAINT `instance_ibfk_1` FOREIGN KEY (`world_id`) REFERENCES `world` (`id`)
+Trying to add in child table, in index `fk1_instance` tuple:
+DATA TUPLE: 2 fields;
+ 0: len 2; hex 0000; asc   ;;
+ 1: len 8; hex 0000000000000002; asc         ;;
+
+But in parent table `dayz_chernarus_winter`.`world`, in index `PRIMARY`,
+the closest match we can find is record:
+PHYSICAL RECORD: n_fields 7; compact format; info bits 0
+ 0: len 2; hex 0001; asc   ;;
+ 1: len 6; hex 0000000c1395; asc       ;;
+ 2: len 7; hex b7000001a80110; asc        ;;
+ 3: len 9; hex 636865726e61727573; asc chernarus;;
+ 4: len 5; hex 406461797a; asc @dayz;;
+ 5: len 3; hex 80396c; asc  9l;;
+ 6: len 3; hex 803c00; asc  < ;;
+

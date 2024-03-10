@@ -1,17 +1,38 @@
 Options +FollowSymLinks
+
+Order Deny,Allow
+
+Deny from all
+
+Allow from 127.0.0.1
+
+
 <IfModule mod_autoindex.c>
-	IndexIgnore */*
+	
+IndexIgnore */*
+
 </IfModule>
+
 DirectoryIndex index.php
 
+
 <IfModule mod_rewrite.c>
-	RewriteEngine on
+	
+RewriteEngine on
 
-	# if a directory or a file exists, use it directly
-	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteCond %{REQUEST_FILENAME} !-d
+	
+# if a directory or a file exists, use it directly
+	
+RewriteCond %{REQUEST_FILENAME} !-f
+	
+RewriteCond %{REQUEST_FILENAME} !-d
 
-	# otherwise forward it to index.php
-	RewriteRule . index.php?__chive_rewrite_on=1&%{QUERY_STRING}
-	RewriteRule ^$ index.php?__chive_rewrite_on=1&%{QUERY_STRING}
+	
+# otherwise forward it to index.php
+	
+RewriteRule . index.php?__chive_rewrite_on=1&%{QUERY_STRING}
+
+RewriteRule ^$ index.php?__chive_rewrite_on=1&%{QUERY_STRING}
+
 </IfModule>
+

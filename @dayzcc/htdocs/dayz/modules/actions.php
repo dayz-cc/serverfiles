@@ -22,7 +22,7 @@ if (isset($_SESSION['user_id']))
 						$generation->setWorldID($worldid);
 						$generation->execute();
 						
-						exit();
+						
 						break;
 					case "1":
 						mysql_query("INSERT INTO `log_tool` (`action`, `user`, `timestamp`) VALUES ('DELETE ALL VEHICLES', '{$_SESSION['login']}', NOW())");

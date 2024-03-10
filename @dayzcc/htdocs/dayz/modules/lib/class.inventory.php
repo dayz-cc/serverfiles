@@ -105,6 +105,7 @@ Class inventory_generator {
 			"HMMWV_Ambulance_DZ" => "w1w1w2t1i1i1i3i3i3i3i3i3p1p1",
 			"car_sedan" => "w3t2t3t3i3i3i3i3i3i3i3i3p2",
 		//	"player" => "",
+			//"HMMWV_DZ" => "w1w1t1i1i1i3i3i3i3i3i3p1p1", //GHK
 			"VWGolf" => "w3w2t2t3t3i3i3i3i3i3i3i3i3p2"
 		);
 		
@@ -246,7 +247,9 @@ Class inventory_generator {
 					"ItemMap",
 					"ItemCompass",
 					"ItemFlashlightRed",
-					"ItemToolbox"
+					"ItemToolbox",
+					"APSI", //GHK Namalsk content
+					"ItemRadio"
 				),
 			"class3" =>
 				array(
@@ -255,7 +258,8 @@ Class inventory_generator {
 					"ItemFlashlight",
 					"ItemKnife",
 					"ItemHatchet",
-					"ItemMatchbox"
+					"ItemMatchbox",
+					"ItemEtool"
 				)
 			);
 	
@@ -269,7 +273,8 @@ Class inventory_generator {
 					"Skin_Camo1_DZ",
 					"Skin_Sniper1_DZ",
 					"ItemAntibiotic",
-					"PartEngine"
+					"PartEngine",
+					"PipeBomb"
 				),
 			"class2" =>
 				array(
@@ -283,7 +288,9 @@ Class inventory_generator {
 					"PartWheel",
 					"ItemJerrycan",
 					"PartVRotor",
-					"ItemBloodbag"
+					"ItemBloodbag",
+					"TrapBear",
+					"ItemSandbag"
 				),
 			"class3" =>
 				array(

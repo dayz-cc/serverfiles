@@ -1,0 +1,1 @@
+serverinstance|i:1;patharma|s:72:"C:\Program Files (x86)\Steam\SteamApps\common\Arma 2 Operation Arrowhead";servermodlist|s:17:"@dayzcc;@UACDayz;";serverip|s:9:"127.0.0.1";serverport|s:4:"2302";rconpassword|s:9:"adminpass";dbhost|s:9:"127.0.0.1";dbport|s:4:"3306";dbuser|s:4:"dayz";dbpass|s:4:"dayz";dbname|s:14:"dayz_chernarus";serverworld|s:9:"chernarus";

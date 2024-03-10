@@ -3,7 +3,7 @@
 1 "nil"
 1 "true"
 1" false"
-1 "remExFP"
+1 "remExFP"!="switchmove" !="say" !="z_dog_bark_1", !="Dog_SitDown" !="dog_callBack"
 1 "BIS_MPF_logic"
 1 "JIPrequest"
 1 "JIPexec"

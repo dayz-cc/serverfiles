@@ -103,9 +103,9 @@ class vehicle_generator {
 			$instance_id = $this->getInstanceID();
 			$worldspace = str_replace(" ","",$vData['spawnlist'][$world_v_id]['spawn_worldspace']);
 			$inventory = $vGearGen->execute($class_name);
-			$parts = $this->genDamageParts($vData['part_list'][$class_name]);
+			$parts = "[]"; //GHK $this->genDamageParts($vData['part_list'][$class_name]);
 			$fuel = (strpos($parts, "palivo") !== FALSE)? 0 : 0.01 * rand(5, 85);
-			$damage = 0.000000001 * rand(100000000, 700000000);
+			$damage = 0; //GHK 0.000000001 * rand(100000000, 700000000);
 			$last_updated = "CURRENT_TIMESTAMP";
 			$created = "CURRENT_TIMESTAMP";
 			

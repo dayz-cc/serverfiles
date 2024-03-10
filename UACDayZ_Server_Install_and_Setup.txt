@@ -1,0 +1,162 @@
+UAC Dayz Server Installation
+****************************
+Author: ddraig
+date: 5/19/2016
+
+
+All Credit goes to Crosire and his team who built the very cool DayZ Control Center 5.9.2.0 software 
+to easily run and admin your own Dayz Server. My changes are listed in the other readme file in this archive.
+
+Requirements
+************
+1. 'Arma 2', 'Arma 2 Operation Arrowhead' installed with Steam and updated. YOU MUST HAVE Arma 2 Operation Arrowhead, 
+	and Arma 2 installed under the default location: 'C:\Program Files (x86)\Steam\SteamApps\common', 
+	else you will need to edit config files in this installation, *which you will need to do yourself*, which is unreliable and not worth it . 
+2. '@UACDayZ' and '@Chernarus_Winter' directories are placed under 'Arma 2 Operation Arrowhead' directory
+3. Tested on Windows XP and Windows 7. Windows 8 and Windows 10 *should* work.
+
+Installation Steps
+******************
+These steps manually install and setup a version of Dayz Control Center 5.9.2.0 that supports running UAC Dayz server. 
+Instance 1 pointing to dayz_chernarus and instance 2 points to dayz_chernarus_winter. These steps having been tested successfully 
+on multiple machines. If you have problems running a server after following these steps, it could be due to not having the underlying 
+games or mods installed correctly (see 'Requirements' above), permissions on your system or something else environmental. 
+I do not have time to troubleshoot these problems. 
+
+1. Copy the 'AddOns' directory from 'Arma 2' into 'Arma 2 Operation Arrowhead'. 
+	I do not think that DayZ Control Center can load this Addons directory using the 'Arma 2' file path in it's 
+	'Configuration->More->modlist' textbox, as I've tried, so it needs to be copied over into 
+	Arma 2 OA  directory manually unfortunately. This means that if you are playing on the same machine as the server, 
+	that you will use the uacdayzbeta_chernaruslocal.bat &  uacdayzbeta_chernarus_winterlocal.bat 
+	files to join the server, as the other bat files will load the 'Addons' directory twice and you will not be able to join. 
+			
+2. Extract '@UACDayz', '@Chernarus_Winter', '@dayzcc', '@dayzcc_config' directories into 'Arma 2 Operation Arrowhead' directory.
+3. Extract the contents of the 'Keys' directory into your 'Keys' directory underneath your 'Arma 2 Operation Arrowhead' directory, 
+	being careful to not overwrite what is already there.
+4. Extract 'rmod_1.chernarus' and 'rmod_2.chernarus_winter' into the '\Arma 2 Operation Arrowhead\MPMissions' directory.
+5. Extract 'dayzcontrolcenter' folder to wherever you want to run it. Make sure that you have permissions to run 'DayZ Server Controlcenter.exe' 
+	within that directory.
+6. Now extract the following DLL files from the 'setup' directory in the archive to 'Arma 2 Operation Arrowhead' directory, this allows 
+	dayz control center to stop/start server and manage the hive database: 
+	DatabaseMySql.dll, libmysql.dll, tbb.dll, tbbmalloc.dll (*NOTE: If one of these files already exist, do not copy over or replace the original*)
+
+7. In the 'setup' directory in the archive, run the Microsoft supporting library installations: 'vcredist_2010.exe' to completion, 
+	then run 'vcredist_2012.exe'. There is no need to run 'patch.exe'
+
+8. Run 'DayZ Server Controlcenter.exe':
+-'Configuration' sets up server configuration options for the instance. You can flip between instance 1 (Chernarus) and instance 2 (Chernarus_Winter) 
+	lower down on the left hand side. This can be left alone for now.
+-'Administration' actually allows you to stop/start the server instance, and performance dayz & hive specific tasks. 
+	Login using 'uacadmin' with password 'adminpass'. 
+-'Database', this gives direct access to the Hive database and instance/world data. This is only for people who know how to read and work 
+	directly with databases and their data. No need to go here, but you can make a lot of powerful changes here. Login in with 'root', no password, 
+	Or with the default database username and password which is 'dayz' and 'dayz'.
+ 
+9. Once you have logged in to 'Administration', you can flip between instance 1 and 2 using the 'Server instance to manage:' dropdown 
+	on the lower R.H.S. of the bar to the left. 
+ 
+ 'Manage -> Server Control' allows you to stop/start the server. You can optionally enter in a Server Restart loop variable defined in hours. 
+ So '5.5' means 5 1/2 hours. When a server restarts this way,
+ it will do cleanup checks and perform cleanup for the server instance, like removing wrecked/untouched vehicles etc.. and respawning them. 
+ 'Manage ->  Overview' allows management of the hive database for the instance, like cleaning it up (dead player data, alive player data,  
+ deployables, vehicles), and respawning all vehicles etc...  
+ 
+ With this step, provided that you have Arma 2 OA, Arma 2, Steam installed OK as well and up to date, you should be all set to run a UACDayZ server using 
+ 'Manage -> Server Control'. You do not need to be logged into Steam 
+ to run the server. 
+ 
+Dayz CC has many tools and settings, like a map to view players, wrecks etc... on the live server, and a whitelist to limit players etc... 
+Also tools to import more vehicles spawns and buildings into the hive for the instance.
+Going into the all the details of what Dayz CC can do is beyond the scope of this document, and if you go on youtube, you can search for 'Dayz CC', 
+'Dayz Control Center' or 'Dayz Control Center 5.9.2.0' and there
+are some good tutorials. The install of the server provided has settings already set that worked well for me.
+
+What I will talk about is tips and changes I made to Dayz CC 5.9.2.0 to recognize, which may help customization, or running the server to your liking.
+
+Tips and Customizations for Running UAC DayZ
+********************************************
+1. When playing on the same machine as the server (localhost), start the server without logging into Steam. Then log into Steam when you want to join the server. 
+2. Make sure that in 'Configuration' that 'Enable rMod' is checked, and Battleye is turned off (I still need to create filters for all the 
+custom scripts that may kick a player client) 
+3. There are up to 6 instances you can run with Dayz CC, but only 1 and 2 is used by UAC DayZ. 1 for Chernarus, and 2 for Chernarus Winter. 
+You can run both servers together with restart loops, using 2 dayz control centers running together. 
+4. You can change the user you log in to Administer the server from 'uacadmin' and password: 'adminpass' by logging into an instance (1 or 2), then in the upper r.h.s., 
+click on 'Account' then on 'Add new user', keep all options, and add a username and password to your liking. Then click on Account -> 'Logout' to test the new user. 
+Finally go back to 'Account' and delete the uacadmin user. 
+5. To reset or change the 'Root' password for the 'Database' section which uses Chive, please see this video: https://www.youtube.com/watch?v=WVpzM3x0oiE
+6. For 3 & 4 above, you may not need to worry about these steps, since I put in .htaccess files at '\Arma 2 Operation Arrowhead\@dayzcc\htdocs\dayz' and 
+'\Arma 2 Operation Arrowhead\@dayzcc\htdocs\chive' that only allow access from localhost, so remote computers running a browser will never be able to access those 
+log in pages. Basically these 2 directories are web apps that DayZ CC uses for the 'Administration' section and 'Database' chive mysql database admin software. 
+7. @dayzcc_config directory has the server config and log files for each instance, in sub-directories. Settings from the 'Configuration' section in DayZ CC 
+gets saved in these config files for each instance. 
+TIP: To set a custom timezone for the server, go to the HiveExt.ini and set 'Time ->Type = Custom' and whatever 'Time->offset' from UTC you want to use.
+8. The server restart loop textbox and timer in 'Manage -> Server Control' is another UACDayZ customization. It is meant for dedicaed servers, where DayZ CC is meant 
+to stay on that page. If you leave that page to go to another, the server will keep running until you manually stop it. The server when restarting with the restart loop, 
+will do cleanup checks and perform respawns and tidy up if needed (like removing tents or stashes that havent been touched by a player in a few weeks etc...). 
+This does not happen if you manually start/stop a server. 
+9. UACDayZ will spawn all vehicles with no damage, and not less than 1/2 full fuel. To have more vanilla behaviour, with damaged and lower fuelled vehicles 
+spawned, go to '\Arma 2 Operation Arrowhead\@dayzcc\htdocs\dayz\modules\lib' and swap 'class.vehicles.php' with 'class.vehicles - BAK.php'.
+10. UACDayZ will spawn all vehicles with a certain chance to have additional UAC DayZ items, like the APSI mask, ItemEtool etc.., . To have more vanilla behaviour, 
+with just vanilla DayZ 1.7.6.1 items, go to '\Arma 2 Operation Arrowhead\@dayzcc\htdocs\dayz\modules\lib' and swap 'class.inventory.php' with 'class.inventory - BAK.php'.
+11. There are 2 files under '\Arma 2 Operation Arrowhead\@dayzcc\htdocs\dayz' called 'scores.php' and 'scores_winter.php' that shows overall historic 
+player stats for UAC DayZ, one for instance 1, the other for instance 2. The .htaccess file makes an exception for these which can be viewable from other computers.
+They can be accessed by 'http://<your IP Address>:78/dayz/scores.php' and 'http://<your IP Address>:78/dayz/scores_winter.php' etc...
+12. Sometimes the browser in the Dayz Control Center executable is sluggish. Sometimes it is quicker to just go to 'http://127.0.0.1:78/dayz/' to run a server 
+or 'http://127.0.0.1:78/chive/' to access the database. The default database username and password is 'dayz' and 'dayz'.
+13. I have provided the original Dayz Control Center 5.9.2.0. installer 'DayZCC_V5.9.2.0.zip' as well. But the only reason you would want to run this is initially, 
+is if you dont have Arma 2 OA under 'C:\Program Files (x86)\Steam\SteamApps\common' directory. You will still need to copy the '@dayzcc' and '@dayzcc_config' 
+directories manually and overwrite what the installer created in those directories, and *may* need to still manually edit config files in those directories.
+14. The server pbo is at '@dayzcc\addons'. I have included cpbo.exe (http://www.armaholic.com/page.php?id=411) command line utility there to pack and unpack 
+the pbo in case you wanted to make edits. 
+
+UAC DayZ Gameplay Configuration Settings in dayz_server_config.hpp for 'rmod_1.chernarus' and 'rmod_2.chernarus_winter'
+***********************************************************************************************************************
+In 'Arma 2 Operation Arrowhead\@dayzcc\addons\dayz_server_config.hpp' file, there are various settings you can change on the server end. 
+UAC DayZ adds a couple more: 
+NoCountryZeds true/false : Turn off if you do not want extra zeds spawning at certain areas in the country/wild in Chernarus. This can 
+make the The End mission a little easier too. 
+UACTheEnd true/false : If true, The End mission will always be available, rather than being in the same loop with other missions. 
+ 
+The next tips are for the UAC DayZ game play configuration settings that are in init.sqf for 'rmod_1.chernarus' and 'rmod_2.chernarus_winter'.
+ 
+UAC DayZ Gameplay Configuration Settings in init.sqf for 'rmod_1.chernarus' and 'rmod_2.chernarus_winter'
+*********************************************************************************************************
+Each important setting has self explanatory comments in the init.sqf file itself, but its worthwhile to highlight some things: 
+ 
+ dayz_restart_period= 480; //8 hours  : Whatever you set your server restart loop to be in hours in DayZ CC, set this to that time in minutes. 
+ So for 8 hours, this will be 480. This allows players to know how much time till the server restarts
+ 
+UAC DayZ is configured out of the box to support single player with the *very easiest* Bandit AI settings, using the following 3 settings:
+ 
+//THIS IS USED IN DZMS AND WAI to only spawn 1 unit per spawn position for low player count, set to 0 for multiplayer, as this spawns more bandits per mission
+dz_singleplayer_missions=1;
+//Used in DZMS, DZMSHOTSPOTS AND WAI to not spawn vehicles, static guns or helicopter backup, and to force all AI spawned to be at lowest skill level, 
+//great for single player
+dz_easy_missions=true;
+//Used in DZAI to spawn all AI at lowest skill level, regardless of weapongrade
+dz_easy_bandits=true;
+ 
+To increase difficulty, reverse the settings above as you wish. I would recommend to first set both of the last 2 values to be 'true' if bandits are too easy, 
+for single player. For more than a couple of players at a time, set dz_singleplayer_missions=0;
+
+To tweak and increase bandit difficult even more, set dayz_use_custom_bandit_skill = true; then use the following:
+//0=normal, 1=harder (DZAI), 2= hard, 3 = extreme (WAI) Difference between 0 and 1 is not much,  2 is a bit more, 3 is much much harder
+dayz_custom_bandit_skill=0; 
+
+Using custom bandit skill causes all bots skills to be the same range regardless of whether DZAI, WAI, DZMS, DZMSHOTSPOTS or WAI, and for WAI bots, 
+for values of 0 and 1 say, can sometimes make those bots a little easier 
+than not using custom bandit skill.  Its when you set the value to 2 or 3, that you will be facing some very challenging opponents. Note that dz_easy_bandits=true 
+& dz_easy_missions=true always forces ALL bots to be the lowest difficulty for the 
+custom skill selected, and should be turned to false to ensure proper difficulty. 
+
+You can also change difficulty by changing the frequency of bumping into bandits by increasing the maximum roaming bandits on the map:
+dayz_DZAI_maxRandomSpawns=10; //number of DZAI random spawns that move around Chernarus. Default is 10. 
+dayz_DZAI_maxHeliPatrols=1; //number of DZAI heli patrols. Default is 1.
+dayz_DZAI_maxLandPatrols = 3;  //number of DZAI vehicle patrols. Default is 3. 
+
+You can change a lot of other settings that affect difficulty too  
+Some of the flags can  be used to turn off Bandit AI completely (but no missions or End Game), to turn off other features like hordes and bloodsuckers and blowouts.
+
+Finally, if you set this to true, you will hear radio broadcasts from the original Night of the Living Dead film during the intro text and halo jump sequence.
+dz_play_intro_radio=false; //set to true to play the radio soundclips during the intro when the player spawns
+

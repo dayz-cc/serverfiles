@@ -1,0 +1,3 @@
+,
+  CONSTRAINT `instance_building_ibfk_1` FOREIGN KEY (`instance_id`) REFERENCES `instance` (`id`),
+  CONSTRAINT `instance_building_ibfk_2` FOREIGN KEY (`building_id`) REFERENCES `building` (`id`)

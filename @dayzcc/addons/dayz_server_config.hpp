@@ -39,14 +39,19 @@
 //  SpawnHelis true  - Helicopter crashsites are spawned
 //  SpawnHelis false - No crashsites are spawned
 #define SpawnHelis true
-#define SpawnHelisCount 5
+#define SpawnHelisCount 10
 // Spawn random other wrecks
 //  SpawnWrecks true  - Custom wrecks are spawned
 //  SpawnWrecks false - No custom wrecks are spawned
 #define SpawnWrecks true
-#define SpawnWrecksCount 18
+#define SpawnWrecksCount 25
 // Spawn care packages
 //  SpawnCare true  - Care packages are spawned
 //  SpawnCare false - No care packages are spawned
 #define SpawnCare true
-#define SpawnCareCount 4
+#define SpawnCareCount 15
+
+//Always had 'The End' mission on? 
+#define UACTheEnd false
+//No extra country zombie spawns, can make end mission easier too
+#define NoCountryZeds false

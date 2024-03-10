@@ -1,0 +1,1 @@
+`dayz_chernarus_winter`.`instance`, CONSTRAINT `instance_ibfk_1` FOREIGN KEY (`world_id`) REFERENCES `world` (`id`)
